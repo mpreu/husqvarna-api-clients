@@ -1,0 +1,25 @@
+version: "3"
+
+env:
+  OAPI_GENERATOR_IMAGE: docker.io/openapitools/openapi-generator-cli:v6.6.0
+
+tasks:
+  generate:
+    desc: Run all code generators.
+    cmds:
+      - task: api:lua
+
+  api:lua:
+    desc: Run lua code generation.
+    cmds:
+      - |
+        rm -r ./clients/lua/connect || true
+
+        podman run \
+          --rm \
+          --security-opt label=disable \
+          -v $(pwd):/local ${OAPI_GENERATOR_IMAGE} generate \
+          -i /local/apis/connect.yaml \
+          -c /local/config/lua/config.yaml \
+          -o /local/clients/lua/connect \
+          -g lua

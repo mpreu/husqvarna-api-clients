@@ -1,0 +1,9 @@
+globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: "connect-1.0.0-1.rockspec"
+  apiTests: false
+  modelTests: false
+additionalProperties:
+  packageName: connect
+  packageVersion: 1.0.0-1
