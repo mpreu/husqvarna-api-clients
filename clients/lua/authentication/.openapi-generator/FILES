@@ -1,0 +1,4 @@
+authentication-1.0.0-1.rockspec
+authentication/api/o_auth2_api.lua
+authentication/api/token_api.lua
+authentication/model/post_o_auth2_response.lua

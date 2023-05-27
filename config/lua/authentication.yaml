@@ -1,0 +1,9 @@
+globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: "authentication-1.0.0-1.rockspec"
+  apiTests: false
+  modelTests: false
+additionalProperties:
+  packageName: authentication
+  packageVersion: 1.0.0-1

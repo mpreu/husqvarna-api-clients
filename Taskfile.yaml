@@ -7,10 +7,26 @@ tasks:
   generate:
     desc: Run all code generators.
     cmds:
-      - task: api:lua
+      - task: api:lua:authentication
+      - task: api:lua:connect
 
-  api:lua:
-    desc: Run lua code generation.
+  api:lua:authentication:
+    desc: Run lua code generation for the Authentication API.
+    cmds:
+      - |
+        rm -r ./clients/lua/authentication || true
+
+        podman run \
+          --rm \
+          --security-opt label=disable \
+          -v $(pwd):/local ${OAPI_GENERATOR_IMAGE} generate \
+          -i /local/apis/authentication.yaml \
+          -c /local/config/lua/authentication.yaml \
+          -o /local/clients/lua/authentication \
+          -g lua
+
+  api:lua:connect:
+    desc: Run lua code generation for the Connect API.
     cmds:
       - |
         rm -r ./clients/lua/connect || true
@@ -20,6 +36,6 @@ tasks:
           --security-opt label=disable \
           -v $(pwd):/local ${OAPI_GENERATOR_IMAGE} generate \
           -i /local/apis/connect.yaml \
-          -c /local/config/lua/config.yaml \
+          -c /local/config/lua/connect.yaml \
           -o /local/clients/lua/connect \
           -g lua
